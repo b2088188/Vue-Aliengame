@@ -62,6 +62,8 @@ export default createStore({
 
       if (state.questionIndex < state.questions.length - 1)
         state.questionIndex++;
+      else if (Math.sign(state.score) > 0) state.uiState = "won";
+      else state.uiState = "lost";
     },
   },
   actions: {},
