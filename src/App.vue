@@ -15,6 +15,9 @@
         />
         <label :for="option">{{ option }}</label>
       </p>
+      <button @click="pickCharacter">
+        Pick your character!
+      </button>
     </GamestateStart>
     <section v-else>
       <svg viewBox="0 -180 1628 1180" class="main">
@@ -38,13 +41,16 @@
             />
           </clipPath>
         </defs>
+        <Friend />
+        <Score />
+        <component :is="character"></component>
         <text
           x="1000"
           y="930"
           style="font: normal 45px 'Recursive; text-transform: uppercase;"
           class="text"
         >
-          Character Name
+          {{ character }}
         </text>
         <path fill="#f0959f" d="M0 842h657v192H0z" />
         <g id="friendbubble">
@@ -79,10 +85,22 @@
 <script>
 import { reactive, computed, toRefs } from "vue";
 import { useStore } from "vuex";
-import GamestateStart from "@/components/GamestateStart";
+import GamestateStart from "@/components/GamestateStart.vue";
+import Artist from "@/components/Artist.vue";
+import Baker from "@/components/Baker.vue";
+import Friend from "@/components/Friend.vue";
+import Mechanic from "@/components/Mechanic.vue";
+import Score from "@/components/Score.vue";
+import Zombie from "@/components/Zombie.vue";
 export default {
   components: {
     GamestateStart,
+    Artist,
+    Baker,
+    Friend,
+    Mechanic,
+    Score,
+    Zombie,
   },
   setup() {
     const store = useStore();
@@ -90,11 +108,17 @@ export default {
       characterInput: "",
     });
 
+    function pickCharacter() {
+      store.commit("pickCharacter", state.characterInput);
+      store.commit("updateUIState", "characterChosen");
+    }
+
     return {
       uiState: computed(() => store.state.uiState),
       questions: computed(() => store.state.questions),
       characterChoices: computed(() => store.state.characterChoices),
       character: computed(() => store.state.character),
+      pickCharacter,
       ...toRefs(state),
     };
   },

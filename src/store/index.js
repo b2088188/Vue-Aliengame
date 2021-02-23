@@ -44,7 +44,14 @@ export default createStore({
       },
     ],
   },
-  mutations: {},
+  mutations: {
+    pickCharacter(state, payload) {
+      state.character = payload;
+    },
+    updateUIState(state, payload) {
+      state.uiState = payload;
+    },
+  },
   actions: {},
   modules: {},
 });
