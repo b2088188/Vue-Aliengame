@@ -78,6 +78,16 @@
           />
         </g>
       </svg>
+      <div class="friendtalk">
+        <h3>{{ questions[questionIndex].question }}</h3>
+      </div>
+      <div class="zombietalk">
+        <p v-for="character in characterChoices" :key="character">
+          <button @click="pickQuestion(character)">
+            {{ questions[questionIndex][character] }}
+          </button>
+        </p>
+      </div>
     </section>
   </div>
 </template>
@@ -113,12 +123,18 @@ export default {
       store.commit("updateUIState", "characterChosen");
     }
 
+    function pickQuestion(character) {
+      console.log(character);
+    }
+
     return {
       uiState: computed(() => store.state.uiState),
       questions: computed(() => store.state.questions),
       characterChoices: computed(() => store.state.characterChoices),
       character: computed(() => store.state.character),
+      questionIndex: computed(() => store.state.questionIndex),
       pickCharacter,
+      pickQuestion,
       ...toRefs(state),
     };
   },

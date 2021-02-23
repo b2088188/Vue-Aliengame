@@ -5,6 +5,8 @@ export default createStore({
     uiState: "start",
     characterChoices: ["baker", "mechanic", "artist"],
     character: "",
+    questionIndex: 0,
+    score: 0,
     questions: [
       {
         question: `What's your dog's name?`,
