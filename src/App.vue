@@ -19,7 +19,7 @@
         Pick your character!
       </button>
     </GamestateStart>
-    <section v-else>
+    <section v-else-if="uiState === 'characterChosen'">
       <svg viewBox="0 -180 1628 1180" class="main">
         <defs>
           <clipPath id="bottom-clip">
@@ -89,6 +89,7 @@
         </p>
       </div>
     </section>
+    <GamestateFinish v-else />
   </div>
 </template>
 
@@ -96,6 +97,7 @@
 import { reactive, computed, toRefs } from "vue";
 import { useStore } from "vuex";
 import GamestateStart from "@/components/GamestateStart.vue";
+import GamestateFinish from "@/components/GamestateFinish.vue";
 import Artist from "@/components/Artist.vue";
 import Baker from "@/components/Baker.vue";
 import Friend from "@/components/Friend.vue";
@@ -105,6 +107,7 @@ import Zombie from "@/components/Zombie.vue";
 export default {
   components: {
     GamestateStart,
+    GamestateFinish,
     Artist,
     Baker,
     Friend,
