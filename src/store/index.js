@@ -53,6 +53,16 @@ export default createStore({
     updateUIState(state, payload) {
       state.uiState = payload;
     },
+    pickQuestion(state, payload) {
+      if (payload === state.character) {
+        state.score += 10;
+      } else {
+        state.score -= 10;
+      }
+
+      if (state.questionIndex < state.questions.length - 1)
+        state.questionIndex++;
+    },
   },
   actions: {},
   modules: {},

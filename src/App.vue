@@ -124,7 +124,7 @@ export default {
     }
 
     function pickQuestion(character) {
-      console.log(character);
+      store.commit("pickQuestion", character);
     }
 
     return {
